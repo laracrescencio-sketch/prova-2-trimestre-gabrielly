@@ -1,0 +1,252 @@
+/*=====================================================
+Configurações Globais e de reset
+===========================*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* garante que padding e bordas não aumentem a largura total dos elementos */
+}
+/* corpo da página com gradiente radial/linear moderno e contralização flexível */
+body{
+    font-family: 'Outfit', sans-serif; /* Corrigido de 'Outifit' para 'Outfit' */
+    min-height: 100vh; /* ocupa 100% da altura da janela visível */
+    display: flex;
+    align-items: center; /*centraliza o horizonte do jogo */
+    justify-content: center; /* Adicionado para garantir a centralização horizontal perfeita do container */
+    /* fundo degrade dinamico em tons escuros e violetas*/
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #2e1065 100%); /* Adicionadas as vírgulas que faltavam */
+    color: #f8fafc;
+    overflow-x: hidden;
+}
+/* container de largura limitada para ajustar em celulares e telas maiores*/ 
+.conteiner {
+    width: 100%;
+    max-width: 480px;
+    padding: 20px;
+}
+/*=================================================================================================
+desing do cartão (card classmorphic)
+=================================================================================================*/
+.card{
+    /* fundo semi-transparente escuro*/
+    background: rgba(30, 41, 59, 0.7);
+    /* efeito desfoque estilo vidro fosco (classmorphic)*/
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* Adicionado para compatibilidade com Safari */
+    /*borda sutil para dar efeito 3d ao vidro*/
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 40px 30px;
+    /* sombras duplas para profundidade de elevação na tela*/
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-align: center;
+    /* trancições suaves ao interagir (houver) */ 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Corrigido de 'transfor,' para 'transform' */
+}
+/* efeito flutuação ao passar o mause por cima do cartão */
+.card:hover { /* Corrigido de ':houver' para ':hover' */
+    transform: translateY(-5px); /* Corrigido de 'translate(-5px)' para 'translateY(-5px)' para subir o card */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5); /* Corrigido o número '0.o.5' para '0.5' */
+}
+/*====================================================
+cabeçalho (badge de tentativas e titulos)
+======================================================*/
+.stats {
+    display: flex;
+    justify-content:center;
+    margin-bottom: 20px;
+}
+/*pequeno emblema iniciativo do número de tentativas */
+.bedge {
+    background: rgba(99,102 , 241, 0.2);
+    border: 1px solid rgba(99,102 , 241, 0.4);
+    color: #a5b4fc;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 15px rgba(99,102 , 241, 0.1);
+}
+.bedge strong {
+    color: #e0e7ff;
+    font-weight: 700;
+}
+/* titulo com gradiente de texto neon violeta/azul*/
+h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 50%, #c084fc 100%); /* Adicionada a vírgula que faltava */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;   /*Aplica gradiente apenas ao preenchimento texto*/
+    letter-spacing: -.5px;
+}
+.subtitle {
+    color: #94a3b8;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+.subtitle strong {
+     color: #cbd5e1;
+}
+/*==========================================================
+corpo do cartão e inputs do formulário 
+============================================================*/
+.card-body {
+    margin-bottom: 20px;
+}
+/* layout vertical do input de chute e do botão*/
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+/* estilo personalizado para a caixa do texto/número*/
+input[type="number"]  {
+    width: 100%;
+    padding: 16px;
+    background: rgba(15,23, 42, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.1); /* Corrigido de 'border-radius: 2px solid...' para 'border: 2px solid...' */
+    border-radius: 12px; /* Adicionado um arredondamento para combinar com o design do card */
+    color: #fff;
+    font-size: 1.1rem;
+    font-family: inherit;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease; /* Corrigido de '0.3 ease' para '0.3s ease' */
+}
+input[type="number"]::placeholder {
+      color: #475569;
+}
+/* efeito iluminoso ao selecionar e digitar no input*/
+input[type="number"]:focus {
+    border-color: #818cf8;
+    background: rgba(15,23, 42, 0.8); /* Adicionado o ponto e vírgula esquecido */
+    box-shadow: 0 0 20px rgba(129, 140, 248, 0.25);
+}
+/* remove os botões seletores padrão (setas para cima/baixo) do input de numero*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Para navegadores Firefox */
+}
+/*******************************************************************************
+   Estilos de Botões
+*******************************************************************************/
+.btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+/* Botão principal de submissão do palpite */
+.btn-submit {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35);
+}
+.btn-submit:hover {
+    transform: translateY(-2px); /* Efeito flutuante leve */
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+    background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+}
+.btn-submit:active {
+    transform: translateY(1px); /* Efeito de clique físico pressionado */
+}
+/* Botão de reset (Jogar Novamente) verde/esmeralda */
+.btn-reset {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.35);
+}
+/* ==============================================================
+   Alertas e Caixa de Mensagem
+   ============================================================== */
+.alert {
+    padding: 18px;
+    border-radius: 16px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+/* Estilo para quando o jogador acerta o número */
+.alert.sucesso {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+    color: #34d399;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+/* Estilo para dicas de maior ou menor */
+.alert.alerta {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: #f59e0b;
+    color: #fbbf24;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+}
+
+/* Estilo para erros de inserção */
+.alert.erro {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #fca5a5;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+}
+
+/* ==========================================================================
+   Rodapé e Links
+   ========================================================================== */
+.card-footer {
+    margin-top: 15px;
+}
+
+/* Botão textual estilizado como link tradicional */
+.btn-link {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+    color: #94a3b8;
+}
+
+/* ==========================================================================
+   Animações
+   ========================================================================== */
+   .fade-in {
+    animation: fadeIn 0.4s ease forwards; /* Executa a animação de entrada uma única vez */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px); /* Começa um pouco abaixo e transparente */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Finaliza na posição original */
+    }
+}

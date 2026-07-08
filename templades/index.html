@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivinhe o número</title>
+
+    <link rel="preconnect"  href="https://fonts.googleapis.com">
+    <link rel="preconnect"  href="https://fonts.gstatic.com" crossorigin> 
+    <link heref="https://fonts.googleapis.com/css2?family=Outift:wght@300,400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!--Vincula o arquivo CSS estático do Flask ao documento usando o auxiliar 'url for '-->
+</head>
+<body>
+      <!--Cartão visual com efeito de glassmorphic contendo o  jogo-->
+      <div class="card">
+
+        <!--Cabeçalho: exibe o contador de tentativas e do título do jogo -->
+        <div class="card-header">
+            <div class="stats-bar">
+    <!--Insere o número de tentativas passadas pelo Flask de forma dinâmica -->
+      <span class="badge"> Tentativas:
+      <strong>{{tentativas}}</strong></span>
+            </div>
+            <h1>Adivinhe o Número </h1>
+            <p class="subtitle"> pensei em um numero de <strong> 1 a 10 </strong>. consegue acertar?</p>
+        </div>
+
+        <div class="card-body">
+            <!--estrutura condicional jinja2:
+            Mostra o alerta se houver alguma mensagem feedback-->
+            {% if mensagem %}
+            <!-- Aplica dinamicamente a classe CSS corresponde ('sucesso,' 'alerta', ou 'erro')-->
+             <div class="alert 
+             {{classe_mensagem}} fade-in">
+             {{mensagem}}
+             </div>
+             {% endif %}
+
+             <!--estrutura condicional jinja2: se o usúario acertar o numero, altera a interface-->
+             {% if sucesso %}
+             
+            <!-- formulario especial para resolver a pertida e tentar de novo-->
+        <form method="POST" 
+        class="action-form fade-in">
+        <!--campo oculto para informar ao python que a ação  desejada é 'reset'-->
+        <input type="hidden" 
+        name="action" value="reset">
+        <button type="submit" class="btn btn-reset">Jogar novamente</button>
+          </form>
+          {% else %}
+
+          <form method="POST" class="game-form"> 
+            <div class="class-group">
+              <input type="number" name="chute" min="1" max="10" placeholder="De 1 a 10 ..." required autofocus autocomplete="off">
+              <button type="submit" class="btn btn-submit">Enviar</button>
+            </div>
+          </form>
+          {% endif %}
+          </div>
+
+      <!-- Rodapé: Mostra umma opção de desistir e reiniciar se o jogador já tentou alguma vez-->
+       <div class="card-fooder">
+           {% if not sucesso and tentativas > 0 %}
+           <form method="POST"
+           class="reset-link-form">
+               <!-- campo ouculto enviando a ação de reinicialização para o app.py-->
+                <input type="hidden" name="action"
+                value="reset">
+                <button type="submit"
+                class="btn-link"> reiniciar jogo</button>
+          </form>
+          {% endif %}
+       </div>
+      </div>
+</body>
+</html>
